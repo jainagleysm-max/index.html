@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Letter 💌</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Georgia, serif;
+        }
+        body {
+            background: #fff5f5;
+            padding: 20px;
+            line-height: 1.8;
+        }
+        .container {
+            max-width: 550px;
+            margin: 50px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(200, 100, 120, 0.15);
+        }
+        h1 {
+            text-align: center;
+            color: #b3415f;
+            margin-bottom: 30px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ffccd5;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #b3415f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+        button:hover {
+            background: #942f4a;
+        }
+        .letter {
+            display: none;
+        }
+        .letter-content {
+            background: #fff0f3;
+            padding: 30px;
+            border-radius: 12px;
+            color: #444;
+        }
+        .signature {
+            text-align: right;
+            margin-top: 30px;
+            color: #b3415f;
+            font-weight: bold;
+        }
+        .logout-btn {
+            background: #666;
+            margin-top: 20px;
+        }
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>💌 Love Letter</h1>
+
+        <!-- Login Page -->
+        <div id="loginPage">
+            <p style="text-align:center; color:#666; margin-bottom:15px;">Enter your email to read the letter</p>
+            <input type="email" id="emailInput" placeholder="your@email.com">
+            <button onclick="login()">Read Letter 💌</button>
+        </div>
+
+        <!-- Letter Page -->
+        <div id="letterPage" class="letter">
+            <p style="text-align:center; color:#b3415f; margin-bottom:20px;">For you, <span id="userEmail"></span> 💖</p>
+            
+            <div class="letter-content">
+                <p>My Dearest,</p>
+                <br>
+                <p>I wanted to write this just to tell you how much you truly mean to me. Words can't fully explain how happy you make me, but I hope you feel it every day.</p>
+                <br>
+                <p>Thank you for being my happiness, my safe place, and the best part of my days. You make everything better just by being you. I love who I am when I'm with you.</p>
+                <br>
+                <p>Please never forget how special you are, how loved you are, and how deeply I care for you. I'm always here for you — no matter what.</p>
+                <br>
+                <p>You are my favorite person, today and always.</p>
+                <p class="signature">— With all my love,<br>Xyrelle Thea 💌</p>
+            </div>
+
+            <button class="logout-btn" onclick="logout()">Log Out</button>
+        </div>
+    </div>
+
+    <script>
+        // Check if already logged in
+        window.onload = function() {
+            if (localStorage.getItem('userEmail')) {
+                showLetter(localStorage.getItem('userEmail'));
+            }
+        };
+
+        function login() {
+            const email = document.getElementById('emailInput').value.trim();
+            if (!email || !email.includes('@')) {
+                alert('Enter a valid email 📧');
+                return;
+            }
+            localStorage.setItem('userEmail', email);
+            showLetter(email);
+        }
+
+        function showLetter(email) {
+            document.getElementById('loginPage').classList.add('hidden');
+            document.getElementById('letterPage').style.display = 'block';
+            document.getElementById('userEmail').textContent = email;
+        }
+
+        function logout() {
+            localStorage.removeItem('userEmail');
+            document.getElementById('letterPage').style.display = 'none';
+            document.getElementById('loginPage').classList.remove('hidden');
+            document.getElementById('emailInput').value = '';
+        }
+    </script>
+
+</body>
+</html>
